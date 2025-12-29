@@ -7,7 +7,8 @@ RUN chmod -R +x  /home/user/examples/lua
 # We set WORKDIR, as this gets extracted by Webvm to be used as the cwd. This i>
 WORKDIR /home/user/
 # We set env, as this gets extracted by Webvm. This is optional.
-ENV HOME="/home/user" TERM="xterm" USER="user" SHELL="/bin/bash" EDITOR="vim" L>
+ENV HOME="/home/user" TERM="xterm" USER="user" SHELL="/bin/bash" EDITOR="vim" LANG="en_US.UTF-8" LC_ALL="C"
+
 RUN echo 'root:password' | chpasswd
 
 COPY dockerfiles/yuyake_bunko/app/ /home/user
