@@ -2,6 +2,7 @@ FROM --platform=i386 python:3
 RUN useradd -m user && echo "user:password" | chpasswd
 RUN echo 'root:password' | chpasswd
 
+WORKDIR /home/user
 
 COPY dockerfiles/yuyake_bunko/app/ /home/user
 COPY dockerfiles/yuyake_bunko/flag.txt /home/user
