@@ -1,11 +1,20 @@
-FROM --platform=i386 i386/python:3
+FROM --platform=i386 i386/python3
 
-WORKDIR /app
-COPY dockerfiles/yuyake_bunko/app/ /app
-COPY dockerfiles/yuyake_bunko/flag.txt /flag.txt
+ARG DEBIAN_FRONTEND=noninteractive
+RUN useradd -m user && echo "user:password" | chpasswd
+COPY --chown=user:user ./examples /home/user/examples
+RUN chmod -R +x  /home/user/examples/lua
+# We set WORKDIR, as this gets extracted by Webvm to be used as the cwd. This i>
+WORKDIR /home/user/
+# We set env, as this gets extracted by Webvm. This is optional.
+ENV HOME="/home/user" TERM="xterm" USER="user" SHELL="/bin/bash" EDITOR="vim" L>
+RUN echo 'root:password' | chpasswd
+
+COPY dockerfiles/yuyake_bunko/app/ /home/user
+COPY dockerfiles/yuyake_bunko/flag.txt /home/user
 
 RUN pip install -r requirements.txt
 
-EXPOSE 8000
+
 CMD ["python", "app.py"]
 CMD [ "/bin/bash" ]
