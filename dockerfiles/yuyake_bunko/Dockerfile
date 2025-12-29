@@ -1,4 +1,4 @@
-FROM python:3
+FROM --platform=i386 i386/python:3
 
 WORKDIR /app
 COPY app/ /app
