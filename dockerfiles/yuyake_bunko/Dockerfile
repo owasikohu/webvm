@@ -1,4 +1,4 @@
-FROM --platform=i386 i386/python3
+FROM --platform=linux/i386 python3
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN useradd -m user && echo "user:password" | chpasswd
